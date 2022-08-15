@@ -14,4 +14,57 @@
 
 'use strict';
 
-// Код возьмите из предыдущего домашнего задания
+
+const movieDB = {
+  movies: [
+    "Логан",
+    "Лига справедливости",
+    "Ла-ла лэнд",
+    "Одержимость",
+    "Скотт Пилигрим против..."
+  ]
+};
+
+let a;
+let b;
+let numberOfFilms = prompt('how much films have you seen?', 0);
+// let a = prompt('what was the last movie you watched?');
+// let b = prompt('how do you rate it?');
+// let c = prompt('what was the last movie you watched?');
+// let d = prompt('how do you rate it?');
+
+const personalMovieDB = {
+  count: numberOfFilms,
+  movies: {},
+  actors: {},
+  genres: [],
+  private: false
+};
+
+for (let i = 0; i < 2; i++) {
+  a = prompt('what was the last movie you watched?');
+  if (a == '' || a == null || a.length > 50) {
+    i--;
+    continue;
+  }
+  console.log(a);
+  b = prompt('how do you rate it?');
+  if (b == '' || b == null || b.length > 50) {
+    i--;
+    continue;
+  }
+  console.log(b);
+  personalMovieDB.movies[a] = b;
+}
+
+if (personalMovieDB.count < 10) {
+  console.log('you are not cinemaddict');
+} else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
+  console.log('you are almost cinemaddict');
+} else {
+  console.log('you are cinemaddict');
+}
+
+
+// personalMovieDB.movies[a] = b;
+// personalMovieDB.movies[c] = d;
