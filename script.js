@@ -14,6 +14,7 @@
 
 'use strict';
 
+let numberOfFilms;
 
 const movieDB = {
   movies: [
@@ -25,14 +26,6 @@ const movieDB = {
   ]
 };
 
-let a;
-let b;
-let numberOfFilms = prompt('how much films have you seen?', 0);
-// let a = prompt('what was the last movie you watched?');
-// let b = prompt('how do you rate it?');
-// let c = prompt('what was the last movie you watched?');
-// let d = prompt('how do you rate it?');
-
 const personalMovieDB = {
   count: numberOfFilms,
   movies: {},
@@ -41,30 +34,72 @@ const personalMovieDB = {
   private: false
 };
 
-for (let i = 0; i < 2; i++) {
-  a = prompt('what was the last movie you watched?');
-  if (a == '' || a == null || a.length > 50) {
-    i--;
-    continue;
+
+function start() {
+
+  numberOfFilms = +prompt('how much films have you seen?', 0);
+
+  while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+    numberOfFilms = +prompt('how much films have you seen?', 0);
   }
-  console.log(a);
-  b = prompt('how do you rate it?');
-  if (b == '' || b == null || b.length > 50) {
-    i--;
-    continue;
-  }
-  console.log(b);
-  personalMovieDB.movies[a] = b;
 }
 
-if (personalMovieDB.count < 10) {
-  console.log('you are not cinemaddict');
-} else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
-  console.log('you are almost cinemaddict');
-} else {
-  console.log('you are cinemaddict');
+function rememberMyFilms() {
+  for (let i = 0; i < 2; i++) {
+    let a = prompt('what was the last movie you watched?', 'the movie');
+    let b = prompt('how do you rate it?', 7);
+
+    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+      personalMovieDB.movies[a] = b;
+      console.log('done');
+    } else {
+      console.log('error');
+      i--;
+    }
+    // if (a == '' || a == null || a.length > 50) {
+    //   i--;
+    //   continue;
+    // }
+    // console.log(a);
+    
+    // if (b == '' || b == null || b.length > 50) {
+    //   i--;
+    //   continue;
+    // }
+    // console.log(b);
+    // personalMovieDB.movies[a] = b;
+  }
 }
 
+function detectPersonalLevel() {
+  if (personalMovieDB.count < 10) {
+    console.log('you are not cinemaddict');
+  } else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
+    console.log('you are almost cinemaddict');
+  } else {
+    console.log('you are cinemaddict');
+  }
+}
+// 2) Создать функцию showMyDB, которая будет проверять свойство privat. Если стоит в позиции
+// false - выводит в консоль главный объект программы
 
-// personalMovieDB.movies[a] = b;
-// personalMovieDB.movies[c] = d;
+// 3) Создать функцию writeYourGenres в которой пользователь будет 3 раза отвечать на вопрос 
+// "Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
+// genres
+
+function showMyDB() {
+  if (personalMovieDB.private == false) {
+    console.log(personalMovieDB);
+  } else {
+    console.log('DB is private');
+  }
+}
+
+function writeYourGenres() {
+  
+}
+
+start();
+rememberMyFilms();
+detectPersonalLevel();
+showMyDB();
