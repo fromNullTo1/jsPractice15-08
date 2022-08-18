@@ -26,6 +26,8 @@ const movieDB = {
   ]
 };
 
+start();
+
 const personalMovieDB = {
   count: numberOfFilms,
   movies: {},
@@ -87,8 +89,8 @@ function detectPersonalLevel() {
 // "Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
 // genres
 
-function showMyDB() {
-  if (personalMovieDB.private == false) {
+function showMyDB(hidden) {
+  if (!hidden) {
     console.log(personalMovieDB);
   } else {
     console.log('DB is private');
@@ -96,10 +98,14 @@ function showMyDB() {
 }
 
 function writeYourGenres() {
-  
+  for(let i = 0; i < 3; i++) {
+    let answer = prompt(`Your favourite genre number ${i + 1} is ...`);
+    personalMovieDB.genres.push(answer);
+  }
 }
 
-start();
+// start();
 rememberMyFilms();
 detectPersonalLevel();
-showMyDB();
+writeYourGenres();
+showMyDB(personalMovieDB.private);
